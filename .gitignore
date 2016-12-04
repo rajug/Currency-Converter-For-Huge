@@ -1,4 +1,10 @@
 # Built application files
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+./.idea
 *.apk
 *.ap_
 

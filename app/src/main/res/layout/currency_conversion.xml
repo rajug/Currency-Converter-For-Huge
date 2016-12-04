@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout         xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View" />
+        <import type="java.lang.String" />
+        <variable name="model" type="com.example.rgirimaji.currencyconverter.CurrencyConverterModel"/>
+        <variable name="eventHandler" type="com.example.rgirimaji.currencyconverter.CurrencyConverter.EventHandler"/>
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="com.example.rgirimaji.currencyconverter.MainActivity">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/dollar"
+            android:id="@+id/dollar"
+            android:layout_alignParentLeft="true"
+            android:layout_alignBottom="@+id/usd"
+            android:textSize="@dimen/dollar_size"
+            android:paddingBottom="@dimen/small_padding"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/usd"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:text="@={model.usd}"
+            android:inputType="number"
+            android:layout_toLeftOf="@+id/btn"
+            android:paddingTop="@dimen/medium_padding"
+            android:layout_toRightOf="@+id/dollar"
+            android:textSize="@dimen/dollar_size"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@id/usd"
+            android:layout_width="wrap_content"
+            android:text="@string/convert"
+            android:onClick="@{eventHandler::onConvertClicked}"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/xxlarge"
+            android:layout_below="@id/btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_light"
+            android:padding="@dimen/medium_padding"
+            android:visibility="@{model.showResults != null ? View.VISIBLE: View.GONE}"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/input_usd"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                tools:text="USD"
+                android:textSize="@dimen/dollar_size"
+                android:text="@{ @string/usd_value(model.lastUsd)}"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/date"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                tools:text="2016-12-02 8:01"
+                android:textSize="@dimen/date_size"
+                android:textStyle="bold"
+                android:text="@{model.lastDate}"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/gbp"
+                android:text="@{model.gbp}"
+                tools:text="GBP"
+                style="@style/result_currency_value"/>
+
+            <TextView
+                android:id="@+id/jpy"
+                android:text="@{model.jpy}"
+                style="@style/result_currency_value"
+                tools:text="JPY"/>
+
+            <TextView
+                android:id="@+id/brl"
+                android:text="@{model.brl}"
+                tools:text="BRL"
+                style="@style/result_currency_value"/>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/medium_padding"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/dollar"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"/>
+
+    </RelativeLayout>
+</layout>

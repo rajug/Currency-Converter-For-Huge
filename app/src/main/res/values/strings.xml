@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">USD Converter</string>
+    <string name="convert">Convert</string>
+    <string name="progress_msg">Getting Rates</string>
+    <string name="validation_error">Please enter a valid USD amount to convert</string>
+    <string name="network_error">Error getting rates. Please check your network connection and try again.</string>
+    <string name="dollar">$</string>
+    <string name="gbp_value" formatted="false">\u00A3%.2f GBP (@%s)</string>
+    <string name="jpy_value" formatted="false">\u00A5%.2f JPY (@%s)</string>
+    <string name="brl_value" formatted="false">R\u0024%.2f BRL (@%s)</string>
+    <string name="usd_value">\u0024%s USD</string>
+</resources>
