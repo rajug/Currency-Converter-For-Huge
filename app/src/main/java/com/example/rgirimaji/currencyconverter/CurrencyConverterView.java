@@ -20,7 +20,6 @@ import static android.databinding.DataBindingUtil.setContentView;
 
 public class CurrencyConverterView implements CurrencyConverter.View
 {
-  EditText _dollarEditBox;
   final Activity _parent;
   CurrencyConversionBinding _viewBinding;
   public CurrencyConverterView(Activity parent)
@@ -36,20 +35,14 @@ public class CurrencyConverterView implements CurrencyConverter.View
 
     _viewBinding.setEventHandler(eventHandler);
     _viewBinding.setModel(model);
-    _dollarEditBox =  _viewBinding.usd;
   }
 
-  @Override
-  public void showData()
-  {
-
-  }
 
   @Override
   public void hideKB()
   {
     InputMethodManager mgr = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-    mgr.hideSoftInputFromWindow(_dollarEditBox.getWindowToken(), 0);
+    mgr.hideSoftInputFromWindow(_viewBinding.usd.getWindowToken(), 0);
   }
 
   @Override
@@ -75,9 +68,9 @@ public class CurrencyConverterView implements CurrencyConverter.View
   @Override
   public void setCursorEnd()
   {
-    if (_dollarEditBox.getText().length() > 0)
+    if (_viewBinding.usd.getText().length() > 0)
     {
-      _dollarEditBox.setSelection(_dollarEditBox.getText().length());
+      _viewBinding.usd.setSelection(_viewBinding.usd.getText().length());
     }
   }
 

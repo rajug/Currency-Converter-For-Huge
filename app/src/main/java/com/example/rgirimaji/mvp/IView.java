@@ -5,7 +5,7 @@ import android.content.Context;
 /**
  * Created by rgirimaji on 12/2/16.
  */
-public interface BaseView
+public interface IView
 {
   Context getContext();
 }

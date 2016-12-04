@@ -1,15 +1,14 @@
 package com.example.rgirimaji.currencyconverter;
 
-import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 
-import com.example.rgirimaji.mvp.BaseModel;
+import com.example.rgirimaji.mvp.IModel;
 
 /**
  * Created by rgirimaji on 12/2/16.
  */
 
-public class CurrencyConverterModel implements BaseModel
+public class CurrencyConverterModel implements IModel
 {
   public final ObservableField<String> usd = new ObservableField<>("1");
   public final ObservableField<Integer> lastUsd = new ObservableField<>();

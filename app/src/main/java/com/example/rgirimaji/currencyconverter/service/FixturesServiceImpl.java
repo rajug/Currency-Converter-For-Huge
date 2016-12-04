@@ -24,7 +24,6 @@ public class FixturesServiceImpl implements FixturesService
     FixturesEndPoint fixturesEndPoint = retrofit.create(FixturesEndPoint.class);
 
     final Call<ResultsModel> call = fixturesEndPoint.getRates();
-    //asynchronous call
     call.enqueue(new Callback<ResultsModel>()
     {
       @Override

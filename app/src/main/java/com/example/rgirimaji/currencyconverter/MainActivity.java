@@ -3,10 +3,11 @@ package com.example.rgirimaji.currencyconverter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.rgirimaji.currencyconverter.service.FixturesService;
+import com.example.rgirimaji.currencyconverter.service.FixturesServiceImpl;
+
 public class MainActivity extends AppCompatActivity
 {
-  CurrencyConverterPresenter _ccPresenter;
-
   @Override
   protected void onCreate(Bundle savedInstanceState)
   {
@@ -16,23 +17,11 @@ public class MainActivity extends AppCompatActivity
 
   private void setupMVP()
   {
+    FixturesService fixturesService = new FixturesServiceImpl();
+
     CurrencyConverterView ccView = new CurrencyConverterView(this);
     CurrencyConverterModel ccModel = new CurrencyConverterModel();
-    _ccPresenter = new CurrencyConverterPresenter(ccView, ccModel);
-    _ccPresenter.onCreate();
-  }
-
-  @Override
-  protected void onResume()
-  {
-    super.onResume();
-    _ccPresenter.onResume();
-  }
-
-  @Override
-  protected void onPause()
-  {
-    super.onPause();
-    _ccPresenter.onPause();
+    CurrencyConverterPresenter ccPresenter = new CurrencyConverterPresenter(ccView, ccModel, fixturesService);
+    ccPresenter.onCreate();
   }
 }

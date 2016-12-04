@@ -27,10 +27,13 @@ public class CurrencyConverterPresenter implements CurrencyConverter.Presenter, 
 {
   private final CurrencyConverter.View _view;
   private final CurrencyConverterModel _model;
-  public CurrencyConverterPresenter(CurrencyConverter.View v, CurrencyConverterModel model)
+  private final FixturesService _fixturesService;
+
+  public CurrencyConverterPresenter(CurrencyConverter.View v, CurrencyConverterModel model, FixturesService fixturesService)
   {
     _view = v;
     _model = model;
+    _fixturesService = fixturesService;
   }
 
   @Override
@@ -48,22 +51,28 @@ public class CurrencyConverterPresenter implements CurrencyConverter.Presenter, 
   @Override
   public void onPause()
   {
-
+    _view.showNetworkError();
   }
 
   @Override
-  public void onDataAvailable()
+  public void onDataAvailable(ResultsModel resultsModel)
   {
-
+    _model.lastUsd.set(Integer.valueOf(_model.usd.get()));
+    _model.showResults.set(true);
+    _model.lastDate.set(resultsModel.getDate() + " " + new SimpleDateFormat("hh:mm:ss a").format(Calendar.getInstance().getTime()));
+    setRate(resultsModel, "GBP", _model.gbp, R.string.gbp_value);
+    setRate(resultsModel, "JPY", _model.jpy, R.string.jpy_value);
+    setRate(resultsModel, "BRL", _model.brl, R.string.brl_value);
   }
 
   @Override
   public void onDataError()
   {
-
+    _view.showNetworkError();
   }
 
-  private boolean validateInput()
+  @Override
+  public boolean validateInput()
   {
     return _model.usd.get() != null && _model.usd.get().trim().length() > 0;
   }
@@ -85,8 +94,7 @@ public class CurrencyConverterPresenter implements CurrencyConverter.Presenter, 
 
   private void getRates(final Dialog spinner)
   {
-    FixturesService fixturesService = new FixturesServiceImpl();
-    fixturesService.getRates(new FixturesService.FixturesServiceCallback()
+    _fixturesService.getRates(new FixturesService.FixturesServiceCallback()
     {
       @Override
       public void onSuccess(ResultsModel resultsModel)
@@ -94,7 +102,11 @@ public class CurrencyConverterPresenter implements CurrencyConverter.Presenter, 
         spinner.dismiss();
         if (resultsModel != null && resultsModel.getRates() != null && resultsModel.getRates().size() > 0)
         {
-          processResults(resultsModel);
+          onDataAvailable(resultsModel);
+        }
+        else
+        {
+          onDataError();
         }
       }
 
@@ -102,25 +114,11 @@ public class CurrencyConverterPresenter implements CurrencyConverter.Presenter, 
       public void onError()
       {
         spinner.dismiss();
-        onError();
+        onDataError();
       }
     });
   }
 
-  private void onError()
-  {
-    _view.showNetworkError();
-  }
-
-  private void processResults(ResultsModel resultsModel)
-  {
-    _model.lastUsd.set(Integer.valueOf(_model.usd.get()));
-    _model.showResults.set(true);
-    _model.lastDate.set(resultsModel.getDate() + " " + new SimpleDateFormat("hh:mm:ss a").format(Calendar.getInstance().getTime()));
-    setRate(resultsModel, "GBP", _model.gbp, R.string.gbp_value);
-    setRate(resultsModel, "JPY", _model.jpy, R.string.jpy_value);
-    setRate(resultsModel, "BRL", _model.brl, R.string.brl_value);
-  }
 
   private void setRate(ResultsModel resultsModel, String key, ObservableField<String> field, @StringRes int str)
   {

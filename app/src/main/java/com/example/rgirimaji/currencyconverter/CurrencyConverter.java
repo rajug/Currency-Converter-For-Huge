@@ -2,8 +2,9 @@ package com.example.rgirimaji.currencyconverter;
 
 import android.app.Dialog;
 
-import com.example.rgirimaji.mvp.BasePresenter;
-import com.example.rgirimaji.mvp.BaseView;
+import com.example.rgirimaji.currencyconverter.service.ResultsModel;
+import com.example.rgirimaji.mvp.IPresenter;
+import com.example.rgirimaji.mvp.IView;
 
 /**
  * Created by rgirimaji on 12/2/16.
@@ -11,19 +12,19 @@ import com.example.rgirimaji.mvp.BaseView;
 
 public class CurrencyConverter
 {
-  public interface Presenter extends BasePresenter
+  public interface Presenter extends IPresenter
   {
-    void onDataAvailable();
+    boolean validateInput();
+
+    void onDataAvailable(ResultsModel model);
 
     void onDataError();
 
   }
 
-  public interface View extends BaseView
+  public interface View extends IView
   {
     void onCreate(EventHandler eventHandler, CurrencyConverterModel ccModel);
-
-    void showData();
 
     void hideKB();
 
