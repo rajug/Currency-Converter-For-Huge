@@ -97,10 +97,6 @@ public class CurencyConverterTest
     verify(currencyConverterView, times(0)).showNetworkError();
     Assert.assertTrue(currencyConverterModel.showResults.get());
     Assert.assertTrue(currencyConverterModel.jpy.get().contains("113.89"));
-
-    currencyConverterModel.usd.set("6");
-    currencyConverterPresenter.onConvertClicked(mock(View.class));
-    Assert.assertTrue(currencyConverterModel.jpy.get().contains("683.34"));
   }
 
 
