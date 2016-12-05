@@ -57,9 +57,9 @@ public class CurrencyConverterPresenter implements CurrencyConverter.Presenter, 
   @Override
   public void onDataAvailable(ResultsModel resultsModel)
   {
-    _model.lastUsd.set(Integer.valueOf(_model.usd.get()));
+    _model.lastUsd.set(Long.valueOf(_model.usd.get()));
     _model.showResults.set(true);
-    _model.lastDate.set(resultsModel.getDate() + " " + new SimpleDateFormat("hh:mm:ss a").format(Calendar.getInstance().getTime()));
+    _model.lastDate.set(resultsModel.getDate() + " - " + new SimpleDateFormat("hh:mm:ss a").format(Calendar.getInstance().getTime()));
     setRate(resultsModel, "GBP", _model.gbp, R.string.gbp_value);
     setRate(resultsModel, "JPY", _model.jpy, R.string.jpy_value);
     setRate(resultsModel, "BRL", _model.brl, R.string.brl_value);
@@ -86,7 +86,7 @@ public class CurrencyConverterPresenter implements CurrencyConverter.Presenter, 
     }
     else
     {
-      _model.usd.set(String.valueOf(Integer.valueOf(_model.usd.get())));
+      _model.usd.set(String.valueOf(Long.valueOf(_model.usd.get())));
       _view.hideKB();
       getRates(_view.showSpinner());
     }

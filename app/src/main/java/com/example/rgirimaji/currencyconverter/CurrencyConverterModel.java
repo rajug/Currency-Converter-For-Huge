@@ -11,7 +11,7 @@ import com.example.rgirimaji.mvp.IModel;
 public class CurrencyConverterModel implements IModel
 {
   public final ObservableField<String> usd = new ObservableField<>("1");
-  public final ObservableField<Integer> lastUsd = new ObservableField<>();
+  public final ObservableField<Long> lastUsd = new ObservableField<>();
   public final ObservableField<String> gbp = new ObservableField<>();
   public final ObservableField<String> jpy = new ObservableField<>();
   public final ObservableField<String> brl = new ObservableField<>();

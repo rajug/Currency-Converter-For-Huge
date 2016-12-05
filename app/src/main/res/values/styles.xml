@@ -1,4 +1,5 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -8,12 +9,20 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="result_currency_value">
+    <style name="HugeTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">Copernicus-Book.otf</item>
+    </style>
+
+    <style name="HugeButtonStyle" parent="android:Widget.Button">
+        <item name="android:fontFamily">Copernicus-Book.otf</item>
+    </style>
+
+    <style name="result_currency_value" >
         <item name="android:padding">@dimen/medium_padding</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/result_currency_value_size</item>
-
+        <item name="android:textColor">@color/white</item>
     </style>
 
 </resources>

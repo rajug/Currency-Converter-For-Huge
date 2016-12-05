@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout         xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools">
     <data>
         <import type="android.view.View" />
@@ -26,8 +27,10 @@
             android:layout_alignParentLeft="true"
             android:layout_alignBottom="@+id/usd"
             android:textSize="@dimen/dollar_size"
-            android:paddingBottom="@dimen/small_padding"
+            android:paddingBottom="@dimen/xsmall_padding"
             android:textStyle="bold"
+            app:font="@{`huge_agb_v5.ttf`}"
+
             android:layout_height="wrap_content"/>
         <EditText
             android:id="@+id/usd"
@@ -39,6 +42,8 @@
             android:paddingTop="@dimen/medium_padding"
             android:layout_toRightOf="@+id/dollar"
             android:textSize="@dimen/dollar_size"
+            android:maxLength="10"
+            android:hint="@string/enter_an_usd_amount"
             android:layout_height="wrap_content"/>
 
         <Button
@@ -50,6 +55,10 @@
             android:layout_alignBottom="@id/usd"
             android:layout_width="wrap_content"
             android:text="@string/convert"
+            android:background="@color/black"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:font="@{`huge_agb_v5.ttf`}"
             android:onClick="@{eventHandler::onConvertClicked}"
             android:layout_height="wrap_content"/>
 
@@ -58,7 +67,7 @@
             android:layout_below="@id/btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_orange_light"
+            android:background="@color/hugeMagenta"
             android:padding="@dimen/medium_padding"
             android:visibility="@{model.showResults != null ? View.VISIBLE: View.GONE}"
             android:orientation="vertical">
@@ -68,34 +77,42 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 tools:text="USD"
+                android:textColor="@color/white"
                 android:textSize="@dimen/dollar_size"
+                android:textStyle="bold"
+                app:font="@{`huge_agb_v5.ttf`}"
                 android:text="@{ @string/usd_value(model.lastUsd)}"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/date"
                 android:gravity="center"
+                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 tools:text="2016-12-02 8:01"
                 android:textSize="@dimen/date_size"
                 android:textStyle="bold"
                 android:text="@{model.lastDate}"
+                app:font="@{`huge_agb_v5.ttf`}"
                 android:layout_height="wrap_content"/>
 
             <TextView
                 android:id="@+id/gbp"
                 android:text="@{model.gbp}"
                 tools:text="GBP"
+                app:font="@{`Copernicus-Book.otf`}"
                 style="@style/result_currency_value"/>
 
             <TextView
                 android:id="@+id/jpy"
                 android:text="@{model.jpy}"
                 style="@style/result_currency_value"
+                app:font="@{`Copernicus-Book.otf`}"
                 tools:text="JPY"/>
 
             <TextView
                 android:id="@+id/brl"
                 android:text="@{model.brl}"
+                app:font="@{`Copernicus-Book.otf`}"
                 tools:text="BRL"
                 style="@style/result_currency_value"/>
         </LinearLayout>
