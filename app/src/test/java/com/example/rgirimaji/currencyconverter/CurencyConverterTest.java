@@ -157,11 +157,4 @@ public class CurencyConverterTest
 
     currencyConverterModel.usd.set("1");
   }
-
-
-  @Test
-  public void tetFixturesService()
-  {
-
-  }
 }
