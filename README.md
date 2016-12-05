@@ -13,8 +13,8 @@ annotations to describe the HTTP requests. It can then generate an
 implementation of the interface for you.
 
 ### To quickly Run the App:
-1. Pull the latest from this repo
-2. Go to the root folder of the source code
+1. Clone and Pull the latest from this repo
+2. Open terminal and Go to the root folder of the source code
 3. To install on your phone or emulator: ```./gradlew installDebug```
 4. To run the included tests: ```./gradlew testDebug```
 
